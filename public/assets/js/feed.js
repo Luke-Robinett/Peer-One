@@ -7,7 +7,10 @@ $(document).ready(function () {
     // Populate dropdown list with skills
     skillDropdown.empty();
     skillDropdown.append($("<option>Choose one...</option>"));
-    getSkills(function (skills) {
+    getSkills(function (err, skills) {
+        if (err) {
+            return err;
+        }
         skills.forEach(skill => {
             const newOption = $(`<option value="${skill.id}">${skill.subject}</option>`);
             skillDropdown.append(newOption);
