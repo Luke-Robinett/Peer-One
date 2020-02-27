@@ -17,7 +17,7 @@ newPost.on("click", function (event) {
     // Get user info 
     getUserInfo(function (user) {
         // Populate the JSON object
-        var addPost = {
+        var postData = {
             userId: user.id,
             skillId: $("#skill-dropdown:selected").text(),
             body: $(".new-body").val().trim()
@@ -25,14 +25,12 @@ newPost.on("click", function (event) {
 
         console.log(addPost.body);
 
-        $.ajax("/api/posts", {
-            type: "POST",
-            data: addPost
-        }).then(function () {
+        addPost(postData, function () {
             // Reload the page to get the updated list
             window.location.replace("/feed");
         });
     });
+});
 
 // saveResponse.on("click", function(event) {
 //     var addResponse = {
