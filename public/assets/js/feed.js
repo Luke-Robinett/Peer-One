@@ -18,22 +18,21 @@ newPost.on("click", function (event) {
     getUserInfo(function (user) {
         // Populate the JSON object
         var addPost = {
-        userId: user.id,
+            userId: user.id,
             skillId: $("#skill-dropdown:selected").text(),
-                body: $(".new-body").val().trim()
-        }
-
+            body: $(".new-body").val().trim()
+        };
 
         console.log(addPost.body);
 
         $.ajax("/api/posts", {
             type: "POST",
             data: addPost
-          }).then(function () {
+        }).then(function () {
             // Reload the page to get the updated list
-            window.location.replace("http://localhost:8080/feed");
-          });
+            window.location.replace("/feed");
         });
+    });
 
 // saveResponse.on("click", function(event) {
 //     var addResponse = {
