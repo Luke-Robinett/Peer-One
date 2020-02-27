@@ -1,7 +1,7 @@
 // Functions to talk to the back end API
 
 // Base URL for API calls. Will need to be changed when put into production
-const baseUrl = "https://peer-up.herokuapp.com/";
+const baseUrl = "https://peer-up.herokuapp.com";
 
 // POST calls
 
