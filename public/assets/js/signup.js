@@ -37,18 +37,10 @@ $(document).ready(function () {
                     password: password
                 };
 
-                // Make the AJAX POST request
-                $.ajax("http://localhost:8080/api/signup", {
-                    method: "POST",
-                    data: newUser
-                })
-                    .then(function (response) {
-                        console.log(response);
-                        window.location.replace("login");
-                    })
-                    .catch(function () {
-                        alert("Server error. Couldn't create user.");
-                    });
+                signUp(newUser, function (err, response) {
+                    console.log(response);
+                    window.location.replace("login");
+                });
             } else {
                 alert("Please enter a valid password.");
             }
@@ -57,10 +49,3 @@ $(document).ready(function () {
         }
     });
 });
-
-function getRandomUsername(callback) {
-    $.get("http://localhost:8080/api/namegen")
-        .then(function (response) {
-            callback(response);
-        });
-}

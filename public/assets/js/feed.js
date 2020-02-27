@@ -1,36 +1,39 @@
-const newPost = $(".new-post");
-const saveResponse = $(".save");
-const logout = $(".logout-icon");
-const skillDropdown = $("#skill-dropdown");
+$(document).ready(function () {
+    const newPost = $(".new-post");
+    const saveResponse = $(".save");
+    const logout = $(".logout-icon");
+    const skillDropdown = $("#skill-dropdown");
 
-// Populate dropdown list with skills
-skillDropdown.empty();
-skillDropdown.append($("<option>Choose one...</option>"));
-getSkills(function (skills) {
-    skills.forEach(skill => {
-        const newOption = $(`<option value="${skill.id}">${skill.subject}</option>`);
-        skillDropdown.append(newOption);
+    // Populate dropdown list with skills
+    skillDropdown.empty();
+    skillDropdown.append($("<option>Choose one...</option>"));
+    getSkills(function (skills) {
+        skills.forEach(skill => {
+            const newOption = $(`<option value="${skill.id}">${skill.subject}</option>`);
+            skillDropdown.append(newOption);
+        });
     });
-});
 
-newPost.on("click", function (event) {
-    // Get user info 
-    getUserInfo(function (user) {
-        // Populate the JSON object
-        var postData = {
-            userId: user.id,
-            skillId: $("#skill-dropdown:selected").text(),
-            body: $(".new-body").val().trim()
-        };
+    newPost.on("click", function (event) {
+        // Get user info 
+        getUserInfo(function (user) {
+            // Populate the JSON object
+            var postData = {
+                userId: user.id,
+                skillId: $("#skill-dropdown:selected").text(),
+                body: $(".new-body").val().trim()
+            };
 
-        console.log(addPost.body);
+            console.log(addPost.body);
 
-        addPost(postData, function () {
-            // Reload the page to get the updated list
-            window.location.replace("/feed");
+            addPost(postData, function () {
+                // Reload the page to get the updated list
+                window.location.replace("/feed");
+            });
         });
     });
 });
+
 
 // saveResponse.on("click", function(event) {
 //     var addResponse = {
@@ -45,7 +48,7 @@ newPost.on("click", function (event) {
 //         type: "POST",
 //         data: addResponse
 //       }).then(function() {
-//         // Reload the page to get the updated list
+         // Reload the page to get the updated list
 //         window.location.replace("http://localhost:8080/feed");
 //       });
 // });
